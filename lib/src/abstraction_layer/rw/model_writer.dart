@@ -4,6 +4,7 @@ import 'package:diagram_editor/src/canvas_context/canvas_model.dart';
 import 'package:diagram_editor/src/canvas_context/canvas_state.dart';
 import 'package:diagram_editor/src/canvas_context/model/component_data.dart';
 import 'package:diagram_editor/src/canvas_context/model/diagram_data.dart';
+import 'package:diagram_editor/src/canvas_context/model/link_data.dart';
 import 'package:diagram_editor/src/utils/link_style.dart';
 import 'package:flutter/material.dart';
 
@@ -87,10 +88,18 @@ class CanvasModelWriter extends ModelWriter
       decodeCustomComponentData: decodeCustomComponentData,
       decodeCustomLinkData: decodeCustomLinkData,
     );
-    for (final componentData in diagram.components) {
+    loadDiagram(diagram.components, diagram.links);
+  }
+
+  /// Loads a diagram from component and link data objects.
+  ///
+  /// !!! Beware : the diagram may become unstable if any data are manipulated.
+  /// Deleting existing diagram is recommended.
+  loadDiagram(List<ComponentData> components, List<LinkData> links) {
+    for (final componentData in components) {
       _canvasModel.components[componentData.id] = componentData;
     }
-    for (final linkData in diagram.links) {
+    for (final linkData in links) {
       _canvasModel.links[linkData.id] = linkData;
       linkData.updateLink();
     }
