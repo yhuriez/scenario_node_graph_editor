@@ -171,7 +171,7 @@ class LinkData with ChangeNotifier {
         'id': id,
         'source_component_id': sourceComponentId,
         'target_component_id': targetComponentId,
-        'link_style': linkStyle,
+        'link_style': linkStyle.toJson(),
         'link_points': linkPoints.map((point) => [point.dx, point.dy]).toList(),
         'dynamic_data': data?.toJson(),
       };

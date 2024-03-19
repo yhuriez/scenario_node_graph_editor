@@ -192,7 +192,7 @@ class ComponentData with ChangeNotifier {
         'z_order': zOrder,
         'parent_id': parentId,
         'children_ids': childrenIds,
-        'connections': connections,
+        'connections': connections.map((it) => it.toJson()).toList(),
         'dynamic_data': data?.toJson(),
       };
 }
