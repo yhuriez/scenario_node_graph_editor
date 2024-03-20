@@ -162,7 +162,7 @@ class LinkData with ChangeNotifier {
         sourceComponentId = json['source_component_id'],
         targetComponentId = json['target_component_id'],
         linkStyle = LinkStyle.fromJson(json['link_style']),
-        linkPoints = (json['link_points'] as List<String>)
+        linkPoints = (json['link_points'] as List)
             .map((value) {
               final point = value.split(",");
               return Offset(double.parse(point[0]), double.parse(point[1]));
