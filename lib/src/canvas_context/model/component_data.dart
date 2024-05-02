@@ -183,9 +183,9 @@ class ComponentData with ChangeNotifier {
         .map((connectionJson) => Connection.fromJson(connectionJson)));
   }
 
-  static Size extractSize(Map<String, dynamic> json) {
-    final width = json['size'][0];
-    final height = json['size'][1];
+  static Size extractSize(List<dynamic> points) {
+    final width = points[0];
+    final height = points[1];
 
     return Size(asDouble(width), asDouble(height.toDouble()));
   }
