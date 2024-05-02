@@ -1,4 +1,5 @@
 import 'package:diagram_editor/src/canvas_context/model/connection.dart';
+import 'package:diagram_editor/src/utils/types/types_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -187,7 +188,7 @@ class ComponentData with ChangeNotifier {
     final width = points[0];
     final height = points[1];
 
-    return Size(width.asDouble(), height.asDouble());
+    return Size(asDouble(width), asDouble(height));
   }
 
   Map<String, dynamic> toJson() => {
