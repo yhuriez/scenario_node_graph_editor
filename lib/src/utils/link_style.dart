@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:diagram_editor/src/utils/types/types_ext.dart';
 import 'package:diagram_editor/src/utils/vector_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -227,9 +228,9 @@ class LinkStyle {
       : lineType = LineType.values[json['line_type']],
         arrowType = ArrowType.values[json['arrow_type']],
         backArrowType = ArrowType.values[json['back_arrow_type']],
-        arrowSize = json['arrow_size'],
-        backArrowSize = json['back_arrow_size'],
-        lineWidth = json['line_width'],
+        arrowSize = json['arrow_size'].asDouble(),
+        backArrowSize = json['back_arrow_size'].asDouble(),
+        lineWidth = json['line_width'].asDouble(),
         color = Color(int.parse(json['color'], radix: 16));
 
   Map<String, dynamic> toJson() => {

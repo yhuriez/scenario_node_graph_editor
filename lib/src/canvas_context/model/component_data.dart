@@ -1,4 +1,5 @@
 import 'package:diagram_editor/src/canvas_context/model/connection.dart';
+import 'package:diagram_editor/src/utils/types/types_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -187,14 +188,7 @@ class ComponentData with ChangeNotifier {
     final width = points[0];
     final height = points[1];
 
-    return Size(asDouble(width), asDouble(height.toDouble()));
-  }
-
-  static double asDouble(dynamic value) {
-    if (value is double) return value;
-    if (value is int) return value.toDouble();
-    if (value is String) return double.parse(value);
-    else throw Exception("Invalid value for double: $value");
+    return Size(width.asDouble, height.asDouble());
   }
 
   Map<String, dynamic> toJson() => {
