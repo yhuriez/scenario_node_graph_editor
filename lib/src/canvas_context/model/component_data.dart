@@ -171,8 +171,8 @@ class ComponentData with ChangeNotifier {
     Function(Map<String, dynamic> json)? decodeCustomComponentData,
   })  : id = json['id'],
         position = Offset(json['position'][0], json['position'][1]),
-        size = Size(json['size'][0], json['size'][1]),
-        minSize = Size(json['min_size'][0], json['min_size'][1]),
+        size = extractSize(json['size']),
+        minSize = extractSize(json['min_size']),
         type = json['type'],
         zOrder = json['z_order'],
         parentId = json['parent_id'],
@@ -183,11 +183,25 @@ class ComponentData with ChangeNotifier {
         .map((connectionJson) => Connection.fromJson(connectionJson)));
   }
 
+  static Size extractSize(Map<String, dynamic> json) {
+    final width = json['size'][0];
+    final height = json['size'][1];
+
+    return Size(asDouble(width), asDouble(height.toDouble()));
+  }
+
+  static double asDouble(dynamic value) {
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    if (value is String) return double.parse(value);
+    else throw Exception("Invalid value for double: $value");
+  }
+
   Map<String, dynamic> toJson() => {
         'id': id,
-        'position': [position.dx, position.dy],
-        'size': [size.width, size.height],
-        'min_size': [minSize.width, minSize.height],
+        'position': [position.dx.toDouble(), position.dy.toDouble()],
+        'size': [size.width.toDouble(), size.height.toDouble()],
+        'min_size': [minSize.width.toDouble(), minSize.height.toDouble()],
         'type': type,
         'z_order': zOrder,
         'parent_id': parentId,
