@@ -123,8 +123,13 @@ class CanvasModel with ChangeNotifier {
   }
 
   removeLink(String linkId) {
-    getComponent(getLink(linkId).sourceComponentId).removeConnection(linkId);
-    getComponent(getLink(linkId).targetComponentId).removeConnection(linkId);
+    var link = getLink(linkId);
+    if (components.containsKey(link.sourceComponentId)) {
+      getComponent(link.sourceComponentId).removeConnection(linkId);
+    }
+    if (components.containsKey(link.targetComponentId)) {
+      getComponent(link.targetComponentId).removeConnection(linkId);
+    }
     links.remove(linkId);
     notifyListeners();
   }
