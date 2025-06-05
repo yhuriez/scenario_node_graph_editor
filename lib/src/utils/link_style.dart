@@ -240,6 +240,7 @@ class LinkStyle {
         'arrow_size': arrowSize,
         'back_arrow_size': backArrowSize,
         'line_width': lineWidth,
-        'color': color.toString().split('(0x')[1].split(')')[0],
+        // ignore: deprecated_member_use
+        'color': color.value.toRadixString(16).padLeft(8, '0'),
       };
 }
